@@ -1,4 +1,4 @@
-package com.rulhouse.openexchangeratesdemo.remote.air_pollution.dto
+package com.rulhouse.openexchangeratesdemo.remote.rates.dto
 
 data class Rates(
     val AED: Double,

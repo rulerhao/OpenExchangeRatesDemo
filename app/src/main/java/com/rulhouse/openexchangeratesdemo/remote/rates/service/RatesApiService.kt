@@ -1,4 +1,4 @@
-package com.rulhouse.openexchangeratesdemo.remote.air_pollution.service
+package com.rulhouse.openexchangeratesdemo.remote.rates.service
 
 import com.rulhouse.airpollution.model.remote.air_pollution.dto.AirPollutionInformation
 import retrofit2.Response
