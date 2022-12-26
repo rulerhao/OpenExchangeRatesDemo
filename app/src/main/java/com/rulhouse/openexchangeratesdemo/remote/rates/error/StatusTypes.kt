@@ -9,7 +9,8 @@ enum class StatusTypes {
     InvalidBase,
     Success,
     NetworkError,
-    UnknownError;
+    UnknownError,
+    NoResponse;
 
     companion object {
         fun mapToStatus(code: Int, message: String?): StatusTypes {
