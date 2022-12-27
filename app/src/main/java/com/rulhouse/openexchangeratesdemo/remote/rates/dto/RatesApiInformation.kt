@@ -4,6 +4,6 @@ data class RatesApiInformation(
     val base: String,
     val disclaimer: String,
     val license: String,
-    val rates: Rates,
+    val rates: Map<String, Double>,
     val timestamp: Double
 )
