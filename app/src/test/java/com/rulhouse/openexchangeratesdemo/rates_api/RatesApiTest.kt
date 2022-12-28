@@ -11,13 +11,15 @@ class RatesApiTest {
 
     val arrange = RatesApiTestArrange()
 
-    private val mockItems = RatesApiMockItems()
+    private val mockItems = RatesApiMockItems() // Need to modify manually.
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun correctTest() = runTest {
         arrange.ratesApiUseCases.getRates(arrange.correctTest.first, arrange.correctTest.second).collectLatest { baseResult ->
-            assertEquals(mockItems.correctUSDRateExpected, (baseResult as BaseResult.Success).data.find {it.first == "USD"}!!.second, 0.0)
+            assertEquals(mockItems.correctUSDRateExpected, (baseResult as BaseResult.Success).data.find {it.currency == "USD"}!!.value, 0.0)
+            assertEquals(mockItems.correctTWDRateExpected, baseResult.data.find {it.currency == "TWD"}!!.value, 0.0)
+            assertEquals(mockItems.correctJPYRateExpected, baseResult.data.find {it.currency == "JPY"}!!.value, 0.0)
         }
     }
 
