@@ -1,5 +1,7 @@
 package com.rulhouse.openexchangeratesdemo.remote.rates.impl
 
+import com.rulhouse.openexchangeratesdemo.remote.rates.dto.CurrencyRate
+import com.rulhouse.openexchangeratesdemo.remote.rates.dto.Rate
 import com.rulhouse.openexchangeratesdemo.remote.rates.dto.error_body.ErrorBodyParser
 import com.rulhouse.openexchangeratesdemo.remote.rates.dto.error_body.RatesApiErrorBody
 import com.rulhouse.openexchangeratesdemo.remote.rates.error.StatusTypes
@@ -19,7 +21,7 @@ class RatesApiImpl(
     override suspend fun getRates(
         appId: String?,
         base: String?
-    ): Flow<BaseResult<List<Pair<String, Double>>, StatusTypes>> {
+    ): Flow<BaseResult<List<CurrencyRate>, StatusTypes>> {
         return flow {
             try {
                 val response = apiService.getRatesInformation(appId = appId, base = base)
@@ -35,7 +37,9 @@ class RatesApiImpl(
                     return@flow
                 }
                 if (body != null) {
-                    emit(BaseResult.Success(body.rates.toList()))
+                    val currencyRates: MutableList<CurrencyRate> = mutableListOf()
+                    body.rates.forEach { currencyRates.add(Rate(it.key, it.value)) }
+                    emit(BaseResult.Success(currencyRates))
                     return@flow
                 }
                 emit(BaseResult.Error(StatusTypes.NullBody))
