@@ -29,7 +29,7 @@ fun DropDownMenu(
     ) {
         list.forEach {
             DropdownMenuItem(
-                text = { Text(text = it.value.toString()) },
+                text = { Text(text = (it.value / item.value).toString()) },
                 onClick = { onEvent(DropdownMenuEvent.OnRateSelect(it)) },
                 leadingIcon = { Text(text = it.currency) }
             )
