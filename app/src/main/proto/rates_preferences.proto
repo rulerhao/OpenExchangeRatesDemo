@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option java_package = "com.rulhouse.openexchangeratesdemo.datastore";
+option java_multiple_files = true;
+
+message RatesPreferencesProto {
+    int64 last_fetch_timestamp = 1;
+}
